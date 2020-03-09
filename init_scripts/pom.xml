@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.cx.jenkins.image</groupId>
+    <artifactId>parent</artifactId>
+    <version>1.0.8-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>jenkins-cx</artifactId>
+  <name>Jenkins-CX Hook Scripts</name>
+  <description>Jenkins-CX Initialization Hook Scripts</description>
+
+  <developers>
+    <developer>
+      <name>Wolver</name>
+      <organization>ContinuousX</organization>
+      <organizationUrl>https://cx.io</organizationUrl>
+    </developer>
+  </developers>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.gmavenplus</groupId>
+        <artifactId>gmavenplus-plugin</artifactId>
+        <configuration>
+          <sources>
+            <source>
+              <directory>${project.basedir}/src/main/groovy</directory>
+              <includes>
+                <include>**/*.groovy</include>
+              </includes>
+            </source>
+          </sources>
+          <testSources>
+            <testSource>
+              <directory>${project.basedir}/src/test/groovy</directory>
+              <includes>
+                <include>**/*.groovy</include>
+              </includes>
+            </testSource>
+          </testSources>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
