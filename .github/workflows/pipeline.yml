@@ -45,7 +45,7 @@ jobs:
           export GITHUB_PASSWORD=${{ secrets.GITHUB_TOKEN }}
           #
           ./mvnw versions:set -DnewVersion=${{ steps.tag_bump_version.outputs.new_tag }} -s .mvn/settings.xml
-          ./mvnw clean deploy -DskipTests=true -s .mvn/settings.xml
+          ./mvnw clean deploy -Dmaven.wagon.http.pool=false -DskipTests=true -s .mvn/settings.xml
       - id: gh_release
         name: Release
         uses: softprops/action-gh-release@v1

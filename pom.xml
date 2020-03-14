@@ -128,4 +128,11 @@
     </snapshotRepository>
   </distributionManagement>
 
+  <repositories>
+    <repository>
+      <id>github-cx</id>
+      <url>https://maven.pkg.github.com/Continuous-X/jenkins-cx/</url>
+    </repository>
+  </repositories>
+
 </project>
