@@ -25,7 +25,7 @@ jobs:
       - id: tag_bump_version
         name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.18.0
-        if: github.ref == 'refs/heads/master'
+        if: github.ref != 'refs/heads/master'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
@@ -38,7 +38,7 @@ jobs:
           ./mvnw versions:update-parent versions:display-plugin-updates versions:display-dependency-updates -DgenerateBackupPoms=false -s .mvn/settings.xml
           ./mvnw clean install -s .mvn/settings.xml
       - name: Build,Test & Upload Package (master)
-        if: github.ref == 'refs/heads/master'
+        if: github.ref != 'refs/heads/master'
         run: |
           export MAVEN_REPOSITORY=$(cat MAVEN_REPOSITORY)
           export GITHUB_USERNAME='x-access-token'
@@ -49,7 +49,7 @@ jobs:
       - id: gh_release
         name: Release
         uses: softprops/action-gh-release@v1
-        if: github.ref == 'refs/heads/master'
+        if: github.ref != 'refs/heads/master'
         with:
           body_path: RELEASE.md
           draft: false
