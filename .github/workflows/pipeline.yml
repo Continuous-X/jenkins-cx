@@ -44,7 +44,7 @@ jobs:
           export GITHUB_USERNAME='x-access-token'
           export GITHUB_PASSWORD=${{ secrets.GITHUB_TOKEN }}
           #
-          ./mvnw versions:set -DnewVersion=${{ steps.tag_bump_version.outputs.new_tag }}
+          ./mvnw versions:set -DnewVersion=${{ steps.tag_bump_version.outputs.new_tag }} -s .mvn/settings.xml
           ./mvnw clean deploy -DskipTests=true -s .mvn/settings.xml
       - id: gh_release
         name: Release
