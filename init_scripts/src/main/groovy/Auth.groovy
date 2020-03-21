@@ -1,6 +1,9 @@
 import hudson.model.User
 import hudson.security.SecurityRealm
 import jenkins.model.Jenkins
+import jenkins.security.QueueItemAuthenticatorConfiguration
+import org.jenkinsci.plugins.authorizeproject.GlobalQueueItemAuthenticator
+import org.jenkinsci.plugins.authorizeproject.strategy.TriggeringUsersAuthorizationStrategy
 
 println """
 #############################
@@ -19,11 +22,11 @@ if (createAdmin) {
     admin.setFullName("Admin")
 }
 
-/*println("=== Configure Authorize Project")
+println("=== Configure Authorize Project")
 GlobalQueueItemAuthenticator auth = new GlobalQueueItemAuthenticator(
     new TriggeringUsersAuthorizationStrategy()
 )
-QueueItemAuthenticatorConfiguration.get().authenticators.add(auth)*/
+QueueItemAuthenticatorConfiguration.get().authenticators.add(auth)
 
 println """
 #############################

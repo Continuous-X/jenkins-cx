@@ -1,0 +1,8 @@
+version: '2'
+services:
+  web:
+    image: continuous-x/jenkins-cx:latest
+    container_name: jenkins
+    ports:
+      - "8080:8080"
+      - "50000:50000"
