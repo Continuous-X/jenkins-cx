@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:2.226
+FROM jenkins/jenkins:2.226-alpine
 
 ARG DEV_HOST=localhost
 ARG CREATE_ADMIN=true
@@ -22,11 +22,16 @@ USER root
 COPY master/plugins.txt ${REF}/plugins.txt
 COPY init_scripts/src/main/groovy/ ${REF}/init.groovy.d/
 COPY master/jenkins.yaml $CASC_JENKINS_CONFIG
-COPY master/jenkins-cx.sh /usr/local/bin/jenkins-cx.sh
+COPY master/jenkins-cx2.sh /usr/local/bin/jenkins-cx.sh
 
+RUN apk add --no-cache --update openssl && \
+    rm -rf /var/cache/apk/*
 RUN /usr/local/bin/install-plugins.sh < ${REF}/plugins.txt; \
     mkdir -p ${LOCAL_PIPELINE_LIBRARY_PATH}
 
 USER ${RUNTIME_USER}
 
 ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/jenkins-cx.sh"]
+
+
+

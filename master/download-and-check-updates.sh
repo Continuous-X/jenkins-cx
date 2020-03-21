@@ -4,7 +4,7 @@
 #
 # FROM jenkins
 # RUN install-plugins.sh docker-slaves github-branch-source
-# TODO: Remove the file once check-for-updates is supported in the parent Dockerfile
+# TODO: Remove the file once check-for-updates is supported in the parent Dockerfile-alpine.dockerfile
 set -o pipefail
 
 REF_DIR=${REF:-/usr/share/jenkins/ref/plugins}
@@ -182,7 +182,7 @@ availableUpdates() {
 
     local updatesFile="$REF_DIR/availableUpdates.txt"
 
-    # TODO: do jq installation in Dockerfile so that it comes from cache when plugin list is refreshed
+    # TODO: do jq installation in Dockerfile-alpine.dockerfile so that it comes from cache when plugin list is refreshed
     local failureReason=""
     curl --connect-timeout "${CURL_CONNECTION_TIMEOUT:-20}" \
          --retry "${CURL_RETRY:-5}" --retry-delay "${CURL_RETRY_DELAY:-0}" --retry-max-time "${CURL_RETRY_MAX_TIME:-60}" \
