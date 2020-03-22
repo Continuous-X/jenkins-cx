@@ -22,7 +22,7 @@ USER root
 COPY master/plugins.txt ${REF}/plugins.txt
 COPY init_scripts/src/main/groovy/ ${REF}/init.groovy.d/
 COPY master/jenkins.yaml $CASC_JENKINS_CONFIG
-COPY master/jenkins-cx2.sh /usr/local/bin/jenkins-cx.sh
+COPY master/jenkins-cx.sh /usr/local/bin/jenkins-cx.sh
 
 RUN apk add --no-cache --update openssl && \
     rm -rf /var/cache/apk/*
