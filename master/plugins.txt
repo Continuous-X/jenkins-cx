@@ -1,5 +1,6 @@
 authorize-project:1.3.0
 configuration-as-code:latest
+matrix-auth:2.5
 ownership:0.12.1
 workflow-cps:2.80
 workflow-job:2.37
@@ -22,7 +23,6 @@ workflow-cps-global-lib:2.16
 #kubernetes:latest
 #locale:latest
 #mailer:latest
-#matrix-auth:latest
 #monitoring:latest
 #parallel-test-executor:latest
 #prometheus:latest

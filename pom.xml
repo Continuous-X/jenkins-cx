@@ -62,6 +62,11 @@
                 <version>1.36</version>
             </dependency>
             <dependency>
+                <groupId>org.jenkins-ci.plugins</groupId>
+                <artifactId>matrix-auth</artifactId>
+                <version>2.5</version>
+            </dependency>
+            <dependency>
                 <groupId>com.synopsys.jenkinsci</groupId>
                 <artifactId>ownership</artifactId>
                 <version>0.12.1</version>
