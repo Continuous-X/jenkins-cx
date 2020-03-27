@@ -4,9 +4,11 @@
 extra_java_opts=( \
   '-Djenkins.install.runSetupWizard=false -Djenkins.model.Jenkins.slaveAgentPort=50000' \
   '-Djenkins.model.Jenkins.slaveAgentPortEnforce=true' \
-  "-Dio.jenkins.dev.security.createAdmin=${CONF_CREATE_ADMIN}" \
-  "-Dio.jenkins.dev.security.allowRunsOnMaster=${CONF_ALLOW_RUNS_ON_MASTER}" \
+  "-Dio.jenkins.dev.security.createAdmin=${JENKINS_CONFIG_CREATE_ADMIN}" \
+  "-Dio.jenkins.dev.security.allowRunsOnMaster=${JENKINS_CONFIG_ALLOW_RUNS_ON_MASTER}" \
   '-Dhudson.model.LoadStatistics.clock=1000' \
+  "-Djenkins.config.repository=${JENKINS_CONFIG_REPO}" \
+  "-Dio.jenkins.dev.mainseed.create=${JENKINS_CONFIG_MAINSEED_CREATE}"
 )
 
 if [ -z "$DEV_HOST" ] ; then
