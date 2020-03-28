@@ -1,15 +1,13 @@
+package scripts
 
+import com.cx.jenkins.image.hook.HookScriptHelper
 import jenkins.model.Jenkins
 import hudson.model.JDK
 import hudson.tasks.Maven.MavenInstallation;
 import hudson.tasks.Maven
 import hudson.tools.InstallSourceProperty
 
-println """
-##############################
-# boot - Tools Hook (start)  #
-##############################
-"""
+HookScriptHelper.printHookStart(this)
 
 println("--- Setup tool installations")
 // By default we offer no JDK7, Nodes should override
@@ -23,8 +21,4 @@ InstallSourceProperty p = new InstallSourceProperty([new Maven.MavenInstaller("3
 MavenInstallation mvn = new MavenInstallation("mvn", null, [p])
 Jenkins.getInstanceOrNull().getDescriptorByType(Maven.DescriptorImpl.class).setInstallations(mvn)
 
-println """
-##############################
-# boot - Tools Hook (start)  #
-##############################
-"""
+HookScriptHelper.printHookEnd(this)

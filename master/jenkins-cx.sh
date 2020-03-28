@@ -7,7 +7,7 @@ extra_java_opts=( \
   "-Dio.jenkins.dev.security.createAdmin=${JENKINS_CONFIG_CREATE_ADMIN}" \
   "-Dio.jenkins.dev.security.allowRunsOnMaster=${JENKINS_CONFIG_ALLOW_RUNS_ON_MASTER}" \
   '-Dhudson.model.LoadStatistics.clock=1000' \
-  "-Djenkins.config.repository=${JENKINS_CONFIG_REPO}" \
+  "-Dio.jenkins.dev.mainseed.repository=${JENKINS_CONFIG_REPO}" \
   "-Dio.jenkins.dev.mainseed.create=${JENKINS_CONFIG_MAINSEED_CREATE}"
 )
 

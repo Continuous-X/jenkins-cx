@@ -1,3 +1,6 @@
+package scripts
+
+import com.cx.jenkins.image.hook.HookScriptHelper
 import hudson.security.csrf.DefaultCrumbIssuer
 import jenkins.model.Jenkins
 import jenkins.model.JenkinsLocationConfiguration
@@ -8,13 +11,9 @@ import hudson.tasks.Mailer
 import hudson.plugins.locale.PluginImpl
 */
 
-println """
-###############################
-# boot - System Hook (start)  #
-###############################
-"""
+HookScriptHelper.printHookStart(this)
 
-println("-- System configuration")
+println("-- scripts.System configuration")
 
 // TODO: Configure Job Restrictions, Script Security, Authorize Project, etc., etc.
 println("--- Configuring Remoting (JNLP4 only, no Remoting CLI)")
@@ -40,8 +39,4 @@ localePlugin.systemLocale = "de_DE"
 localePlugin.@ignoreAcceptLanguage=true
 */
 
-println """
-###############################
-# boot - System Hook (end)    #
-###############################
-"""
+HookScriptHelper.printHookEnd(this)

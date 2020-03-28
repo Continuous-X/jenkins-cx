@@ -1,3 +1,6 @@
+package scripts
+
+import com.cx.jenkins.image.hook.HookScriptHelper
 import hudson.model.User
 import hudson.security.SecurityRealm
 import jenkins.model.Jenkins
@@ -5,11 +8,7 @@ import jenkins.security.QueueItemAuthenticatorConfiguration
 import org.jenkinsci.plugins.authorizeproject.GlobalQueueItemAuthenticator
 import org.jenkinsci.plugins.authorizeproject.strategy.TriggeringUsersAuthorizationStrategy
 
-println """
-#############################
-# boot - Auth Hook (start)  #
-#############################
-"""
+HookScriptHelper.printHookStart(this)
 
 boolean createAdmin = Boolean.getBoolean("io.jenkins.dev.security.createAdmin")
 
@@ -28,8 +27,4 @@ GlobalQueueItemAuthenticator auth = new GlobalQueueItemAuthenticator(
 )
 QueueItemAuthenticatorConfiguration.get().authenticators.add(auth)
 
-println """
-#############################
-# boot - Auth Hook (end)    #
-#############################
-"""
+HookScriptHelper.printHookEnd(this)

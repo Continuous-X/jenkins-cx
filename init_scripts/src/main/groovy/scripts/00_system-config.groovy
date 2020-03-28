@@ -1,11 +1,10 @@
+package scripts
+
+import com.cx.jenkins.image.hook.HookScriptHelper
 import jenkins.model.Jenkins
 import jenkins.model.JenkinsLocationConfiguration
 
-println """
-###################################
-# Hook - 00 system config (start) #
-###################################
-"""
+HookScriptHelper.printHookStart(this)
 
 def jenkins = Jenkins.getInstanceOrNull()
 assert jenkins != null : "Jenkins instance is null"
@@ -24,9 +23,4 @@ if (!jenkins.isQuietingDown()){
     println '*** Shutdown mode enabled. Configure Jenkins is SKIPPED!'
 }
 
-
-println """
-###################################
-# Hook - 00 system config (end)   #
-###################################
-"""
+HookScriptHelper.printHookEnd(this)
