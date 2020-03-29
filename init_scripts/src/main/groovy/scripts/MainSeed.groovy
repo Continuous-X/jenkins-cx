@@ -4,8 +4,12 @@ import com.cx.jenkins.image.hook.HookScriptHelper
 import hudson.model.FreeStyleProject
 import hudson.plugins.git.BranchSpec
 import hudson.plugins.git.GitSCM
-import javaposse.jobdsl.plugin.*
+import javaposse.jobdsl.plugin.LookupStrategy
+import javaposse.jobdsl.plugin.RemovedConfigFilesAction
+import javaposse.jobdsl.plugin.RemovedJobAction
+import javaposse.jobdsl.plugin.RemovedViewAction
 import jenkins.model.Jenkins
+import javaposse.jobdsl.plugin.ExecuteDslScripts
 
 HookScriptHelper.printHookStart(this)
 
