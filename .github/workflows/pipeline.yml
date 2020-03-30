@@ -28,7 +28,7 @@ jobs:
         if: github.ref == 'refs/heads/master'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WITH_V: false
+          WITH_V: true
           DEFAULT_BUMP: patch
           DRY_RUN: true
       - name: Build & Test Groovy (branch & master)
