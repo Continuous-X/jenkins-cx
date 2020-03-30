@@ -2,6 +2,7 @@ package scripts
 
 import com.cx.jenkins.image.hook.HookScriptHelper
 import hudson.model.FreeStyleProject
+import hudson.plugins.git.BranchSpec
 import hudson.plugins.git.GitSCM
 import javaposse.jobdsl.plugin.LookupStrategy
 import javaposse.jobdsl.plugin.RemovedConfigFilesAction
@@ -13,8 +14,8 @@ import javaposse.jobdsl.plugin.ExecuteDslScripts
 HookScriptHelper.printHookStart(this)
 
 Jenkins jenkins = Jenkins.getInstanceOrNull()
-String jobName = 'scripts.MainSeed'
-String dslScript = 'scripts.MainSeed.groovy'
+String jobName = 'MainSeed'
+String dslScript = 'MainSeed.groovy'
 boolean createMainSeed = Boolean.getBoolean("io.jenkins.dev.mainseed.create")
 if (createMainSeed) {
     println "create the masterseed job"
@@ -36,12 +37,15 @@ if (createMainSeed) {
     executeDslScripts.setRemovedConfigFilesAction(RemovedConfigFilesAction.DELETE)
     executeDslScripts.setLookupStrategy(LookupStrategy.JENKINS_ROOT)
 
+    GitSCM scm = new GitSCM(jenkinsconfigRepository)
+    scm.getBranches().add(new BranchSpec('master'))
+
     FreeStyleProject mainseedJob = new FreeStyleProject(jenkins, jobName)
     mainseedJob.setDisplayName(jobName)
-    mainseedJob.setScm(new GitSCM(jenkinsconfigRepository))
+    mainseedJob.setScm(scm)
     mainseedJob.getBuildersList().add(executeDslScripts)
-/*mainseedJob.setAssignedNode('master')
-mainseedJob.setAssignedLabel(jenkins.getla)*/
+    /*mainseedJob.setAssignedNode()
+    mainseedJob.setAssignedLabel(jenkins.getla)*/
     mainseedJob.save()
 
     jenkins.reload()
