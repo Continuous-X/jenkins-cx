@@ -1,5 +1,6 @@
 #! /bin/bash -e
 # Additional wrapper, which adds custom environment options for the run
+set
 
 extra_java_opts=( \
   '-Djenkins.install.runSetupWizard=false -Djenkins.model.Jenkins.slaveAgentPort=50000' \
@@ -25,4 +26,5 @@ if [[ "$DEBUG" ]] ; then
 fi
 
 export JAVA_OPTS="$JAVA_OPTS ${extra_java_opts[@]}"
+echo "${JAVA_OPTS}"
 exec /usr/local/bin/jenkins.sh "$@"

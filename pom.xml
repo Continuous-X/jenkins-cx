@@ -22,7 +22,7 @@
     </scm>
 
     <properties>
-        <jenkins.version>2.229</jenkins.version>
+        <jenkins.version>2.230</jenkins.version>
         <java.level>8</java.level>
         <groovy.version>2.4.19</groovy.version>
     </properties>
@@ -70,10 +70,6 @@
                     </exclusion>
                     <exclusion>
                         <groupId>org.jenkins-ci.plugins</groupId>
-                        <artifactId>cloudbees-folder</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.jenkins-ci.plugins</groupId>
                         <artifactId>structs</artifactId>
                     </exclusion>
                     <exclusion>
@@ -94,12 +90,17 @@
             <dependency>
                 <groupId>io.jenkins</groupId>
                 <artifactId>configuration-as-code</artifactId>
-                <version>1.36</version>
+                <version>1.38</version>
             </dependency>
             <dependency>
                 <groupId>io.jenkins.plugins</groupId>
                 <artifactId>configuration-as-code-groovy</artifactId>
                 <version>1.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jenkins-ci.plugins</groupId>
+                <artifactId>cloudbees-folder</artifactId>
+                <version>6.12</version>
             </dependency>
             <dependency>
                 <groupId>org.jenkins-ci.plugins</groupId>
@@ -163,12 +164,6 @@
                 <groupId>org.jenkins-ci.plugins</groupId>
                 <artifactId>security-inspector</artifactId>
                 <version>0.5</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.jenkins-ci.plugins</groupId>
-                        <artifactId>cloudbees-folder</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.jenkins-ci.plugins</groupId>
@@ -242,10 +237,6 @@
                     <exclusion>
                         <groupId>org.jenkins-ci.plugins.workflow</groupId>
                         <artifactId>workflow-durable-task-step</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.jenkins-ci.plugins</groupId>
-                        <artifactId>cloudbees-folder</artifactId>
                     </exclusion>
                     <exclusion>
                         <groupId>org.jenkins-ci.plugins</groupId>
@@ -325,10 +316,6 @@
                 <version>2.16</version>
                 <exclusions>
                     <exclusion>
-                        <groupId>org.jenkins-ci.plugins</groupId>
-                        <artifactId>cloudbees-folder</artifactId>
-                    </exclusion>
-                    <exclusion>
                         <groupId>org.jenkins-ci.plugins.workflow</groupId>
                         <artifactId>workflow-step-api</artifactId>
                     </exclusion>
@@ -392,6 +379,11 @@
         <dependency>
             <groupId>io.jenkins.plugins</groupId>
             <artifactId>configuration-as-code-groovy</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jenkins-ci.plugins</groupId>
+            <artifactId>cloudbees-folder</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>

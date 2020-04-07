@@ -4,24 +4,6 @@ jenkins:
   agentProtocols:
     - "JNLP4-connect"
     - "Ping"
-  nodeProperties:
-    - jobRestrictionProperty:
-        jobRestriction:
-          or:
-            first:
-              multipleAnd:
-                restrictions:
-                  - ownersList:
-                      usersList:
-                        - selectedUserId: "admin"
-                      acceptsCoOwners: false
-                  - regexNameRestriction:
-                      checkShortName: false
-                      regexExpression: "^System/.+"
-            second:
-              jobClassNameRestriction:
-                jobClasses:
-                  - selectedClass: "org.jenkinsci.plugins.workflow.job.WorkflowJob"
   crumbIssuer:
     standard:
       excludeClientIPFromCrumb: true

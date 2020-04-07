@@ -22,15 +22,15 @@
  * THE SOFTWARE.
  */
 
-
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings
+import jenkins.model.Jenkins
 import org.codehaus.groovy.control.CompilerConfiguration
+
+import javax.annotation.Nonnull
+import javax.servlet.ServletContext
+import java.util.logging.Logger
+
 import static java.util.logging.Level.INFO
-import static java.util.logging.Level.WARNING;
-import java.util.logging.Logger;
-import javax.annotation.Nonnull;
-import javax.servlet.ServletContext;
-import jenkins.model.Jenkins;
+import static java.util.logging.Level.WARNING
 
 /**
  * Bootstraps the standard Jenkins initialization logic.
@@ -67,7 +67,7 @@ class GroovyInitBootstrap {
      * Runs the bootstrap and executes all scripts in {@code init.groovy.d/scripts}.
      * @throws Error Execution failed, should be considered as fatal.
      */
-    @SuppressFBWarnings(value = "SE_NO_SERIALVERSIONID", justification = '')
+    //@SuppressFBWarnings(value = "SE_NO_SERIALVERSIONID", justification = '')
     void run() {
         File scriptsDir = new File(home, "init.groovy.d/scripts")
         if (scriptsDir.isDirectory()) {

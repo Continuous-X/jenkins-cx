@@ -1,15 +1,12 @@
 package scripts
 
 import com.cx.jenkins.image.hook.HookScriptHelper
-import hudson.security.csrf.DefaultCrumbIssuer
+import hudson.plugins.locale.PluginImpl
+import hudson.tasks.Mailer
 import jenkins.model.Jenkins
 import jenkins.model.JenkinsLocationConfiguration
 import jenkins.security.s2m.AdminWhitelistRule
 import org.kohsuke.stapler.StaplerProxy
-/*
-import hudson.tasks.Mailer
-import hudson.plugins.locale.PluginImpl
-*/
 
 HookScriptHelper.printHookStart(this)
 
@@ -26,17 +23,13 @@ println("--- Configuring Quiet Period")
 Jenkins.getInstanceOrNull().quietPeriod = 0
 
 println("--- Configuring Email global settings")
-/*
 JenkinsLocationConfiguration.get().adminAddress = "admin@non.existent.email"
 Mailer.descriptor().defaultSuffix = "@non.existent.email"
-*/
 
 println("--- Configuring Locale")
 //TODO: Create ticket to get better API
-/*
 PluginImpl localePlugin = (PluginImpl)Jenkins.getInstanceOrNull().getPlugin("locale")
 localePlugin.systemLocale = "de_DE"
 localePlugin.@ignoreAcceptLanguage=true
-*/
 
 HookScriptHelper.printHookEnd(this)
