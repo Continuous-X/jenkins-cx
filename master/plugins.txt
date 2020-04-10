@@ -4,6 +4,7 @@ cloudbees-folder:6.11.1
 configuration-as-code:1.38
 configuration-as-code-groovy:1.1
 git:4.2.2
+greenballs:1.15
 jdk-tool:1.4
 job-dsl:1.77
 job-restrictions:0.8
