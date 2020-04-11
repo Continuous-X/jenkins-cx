@@ -15,7 +15,7 @@ HookScriptHelper.printHookStart(this)
 
 Jenkins jenkins = Jenkins.getInstanceOrNull()
 String jobName = 'MainSeed'
-String dslScript = 'MainSeed.groovy'
+String dslScript = 'src/main/groovy/MainSeed.groovy'
 boolean createMainSeed = Boolean.getBoolean("io.jenkins.dev.mainseed.create")
 if (createMainSeed) {
     println "create the masterseed job"
@@ -38,7 +38,7 @@ if (createMainSeed) {
     executeDslScripts.setLookupStrategy(LookupStrategy.JENKINS_ROOT)
 
     GitSCM scm = new GitSCM(jenkinsconfigRepository)
-    scm.getBranches().add(new BranchSpec('master'))
+    scm.branches = Collections.singletonList(new BranchSpec("master"))
 
     FreeStyleProject mainseedJob = new FreeStyleProject(jenkins, jobName)
     mainseedJob.setDisplayName(jobName)

@@ -4,24 +4,6 @@ jenkins:
   agentProtocols:
     - "JNLP4-connect"
     - "Ping"
-  nodeProperties:
-    - jobRestrictionProperty:
-        jobRestriction:
-          or:
-            first:
-              multipleAnd:
-                restrictions:
-                  - ownersList:
-                      usersList:
-                        - selectedUserId: "admin"
-                      acceptsCoOwners: false
-                  - regexNameRestriction:
-                      checkShortName: false
-                      regexExpression: "^System/.+"
-            second:
-              jobClassNameRestriction:
-                jobClasses:
-                  - selectedClass: "org.jenkinsci.plugins.workflow.job.WorkflowJob"
   crumbIssuer:
     standard:
       excludeClientIPFromCrumb: true
@@ -47,16 +29,26 @@ jenkins:
               - "Overall/Administer"
             assignments:
               - "admin"
-          - name: "readonly"
+          - name: "viewer"
             description: "Read-only users"
             permissions:
               - "Overall/Read"
               - "Job/Read"
+              - "Agent/Read"
+            assignments:
+              - "authenticated"
+          - name: "contributor"
+            description: "build-only users"
+            permissions:
+              - "Overall/Read"
+              - "Job/Build"
+              - "Job/Delete"
               - "Agent/Build"
+              - "Run/Delete"
             assignments:
               - "authenticated"
         items:
-          - name: "@OwnerNoSid"
+          - name: "Owner1"
             description: "Primary Owners"
             pattern: ".*"
             permissions:
@@ -66,7 +58,7 @@ jenkins:
               - "Run/Delete"
             assignments:
               - "authenticated"
-          - name: "@CoOwnerNoSid"
+          - name: "CoOwner1"
             description: "Secondary Owners"
             pattern: ".*"
             permissions:
@@ -75,7 +67,7 @@ jenkins:
             assignments:
               - "authenticated"
         agents:
-          - name: "@OwnerNoSid"
+          - name: "Owner1"
             description: "Primary Owners"
             pattern: ".*"
             permissions:
@@ -85,7 +77,7 @@ jenkins:
               - "Agent/Build"
             assignments:
               - "authenticated"
-          - name: "@CoOwnerNoSid"
+          - name: "CoOwner1"
             description: "Secondary Owners"
             pattern: ".*"
             permissions:
