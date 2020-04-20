@@ -2,7 +2,7 @@
 
 # 📦 Dependency Updates
 - jenkins 2.233
-
+- jenkins plugins
 # 📝 Documentation updates
 
 # 👻 Maintenance
