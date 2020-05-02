@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>plugin</artifactId>
-        <version>4.0</version>
+        <version>4.1</version>
     </parent>
 
     <groupId>com.cx.jenkins.image</groupId>
@@ -22,7 +22,7 @@
     </scm>
 
     <properties>
-        <jenkins.version>2.232</jenkins.version>
+        <jenkins.version>2.234</jenkins.version>
         <java.level>8</java.level>
         <groovy.version>2.4.19</groovy.version>
     </properties>
@@ -81,8 +81,16 @@
             <dependency>
                 <groupId>io.jenkins.blueocean</groupId>
                 <artifactId>blueocean</artifactId>
-                <version>1.22.0</version>
+                <version>1.23.1</version>
                 <exclusions>
+                    <exclusion>
+                        <groupId>org.jenkins-ci.plugins.workflow</groupId>
+                        <artifactId>workflow-step-api</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.jenkins-ci.plugins</groupId>
+                        <artifactId>credentials-binding</artifactId>
+                    </exclusion>
                     <exclusion>
                         <groupId>org.jenkins-ci.plugins</groupId>
                         <artifactId>authentication-tokens</artifactId>
@@ -185,7 +193,7 @@
             <dependency>
                 <groupId>org.jenkins-ci.plugins</groupId>
                 <artifactId>matrix-auth</artifactId>
-                <version>2.5</version>
+                <version>2.6</version>
             </dependency>
             <dependency>
                 <groupId>org.jenkins-ci.plugins</groupId>
@@ -200,7 +208,7 @@
             <dependency>
                 <groupId>org.jenkins-ci.plugins</groupId>
                 <artifactId>timestamper</artifactId>
-                <version>1.11.2</version>
+                <version>1.11.3</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.jenkins-ci.plugins</groupId>
@@ -250,10 +258,19 @@
                 </exclusions>
             </dependency>
             <dependency>
+                <groupId>org.jenkins-ci.plugins</groupId>
+                <artifactId>pipeline-utility-steps</artifactId>
+                <version>2.5.0</version>
+            </dependency>
+            <dependency>
                 <groupId>org.jenkins-ci.plugins.workflow</groupId>
                 <artifactId>workflow-aggregator</artifactId>
                 <version>2.6</version>
                 <exclusions>
+                    <exclusion>
+                        <groupId>org.jenkins-ci.plugins.workflow</groupId>
+                        <artifactId>workflow-basic-steps</artifactId>
+                    </exclusion>
                     <exclusion>
                         <groupId>org.jenkins-ci.plugins</groupId>
                         <artifactId>docker-commons</artifactId>
@@ -334,7 +351,7 @@
             <dependency>
                 <groupId>org.jenkins-ci.plugins.workflow</groupId>
                 <artifactId>workflow-job</artifactId>
-                <version>2.38</version>
+                <version>2.39</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.jenkins-ci.plugins.workflow</groupId>
@@ -550,17 +567,41 @@
                 </executions>
                 <configuration>
                     <sources>
-                        <!--
-                                    <source>
-                                      <directory>${project.basedir}</directory>
-                                      <includes>
-                                        <include>Jenkinsfile</include>
-                                      </includes>
-                                    </source>
-                        -->
+<!--
+                        <source>
+                            <directory>${project.basedir}</directory>
+                            <includes>
+                                <include>Jenkinsfile</include>
+                            </includes>
+                        </source>
+-->
                     </sources>
                     <groovyDocOutputDirectory>target/site/apidocs</groovyDocOutputDirectory>
                 </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>display-info</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>display-info</goal>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>[3.6.3,)</version>
+                                    <message>3.6.3 required to at least look at .mvn/ if it exists.</message>
+                                </requireMavenVersion>
+                                <requireJavaVersion>
+                                    <version>[1.8.0,)</version>
+                                </requireJavaVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

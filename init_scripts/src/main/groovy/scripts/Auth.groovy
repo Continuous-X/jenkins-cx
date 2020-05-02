@@ -4,7 +4,6 @@ import com.cx.jenkins.image.hook.DefaultUser
 import com.cx.jenkins.image.hook.HookScriptHelper
 import hudson.model.User
 import hudson.security.HudsonPrivateSecurityRealm
-import hudson.security.SecurityRealm
 import jenkins.model.Jenkins
 import jenkins.security.QueueItemAuthenticatorConfiguration
 import org.jenkinsci.plugins.authorizeproject.GlobalQueueItemAuthenticator
