@@ -1,7 +1,7 @@
 authorize-project:1.3.0
-blueocean:1.22.0
-cloudbees-folder:6.11.1
-configuration-as-code:1.38
+blueocean:1.23.1
+cloudbees-folder:6.12
+configuration-as-code:1.39
 configuration-as-code-groovy:1.1
 git:4.2.2
 greenballs:1.15
@@ -9,15 +9,17 @@ jdk-tool:1.4
 job-dsl:1.77
 job-restrictions:0.8
 locale:1.4
-mailer:1.30
-matrix-auth:2.5
+mailer:1.32
+matrix-auth:2.6
+maven-plugin:3.6
 ownership:0.12.1
+pipeline-utility-steps:2.5.0
 role-strategy:2.16
 security-inspector:0.5
-timestamper:1.11.2
+timestamper:1.11.3
 workflow-aggregator:2.6
 workflow-cps:2.80
-workflow-job:2.38
+workflow-job:2.39
 workflow-cps-global-lib:2.16
 yet-another-docker-plugin:0.2.0
 

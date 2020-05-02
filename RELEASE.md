@@ -1,9 +1,8 @@
 # 🚀 New features and improvements
-- create MasterSeed Job with config for jenkins job dsl in remote repository
 
 # 📦 Dependency Updates
-- jenkins 2.229
-
+- jenkins 2.234
+- jenkins plugins
 # 📝 Documentation updates
 
 # 👻 Maintenance
