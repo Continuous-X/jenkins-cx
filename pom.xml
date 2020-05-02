@@ -555,14 +555,14 @@
                 </executions>
                 <configuration>
                     <sources>
-                        <!--
-                                    <source>
-                                      <directory>${project.basedir}</directory>
-                                      <includes>
-                                        <include>Jenkinsfile</include>
-                                      </includes>
-                                    </source>
-                        -->
+<!--
+                        <source>
+                            <directory>${project.basedir}</directory>
+                            <includes>
+                                <include>Jenkinsfile</include>
+                            </includes>
+                        </source>
+-->
                     </sources>
                     <groovyDocOutputDirectory>target/site/apidocs</groovyDocOutputDirectory>
                 </configuration>
