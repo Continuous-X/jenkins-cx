@@ -13,7 +13,7 @@ mailer:1.32
 matrix-auth:2.6.1
 maven-plugin:3.6
 ownership:0.12.1
-pipeline-utility-steps:2.5.0
+pipeline-utility-steps:2.6.0
 role-strategy:2.16
 security-inspector:0.5
 timestamper:1.11.3
