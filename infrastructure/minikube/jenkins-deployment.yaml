@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: jenkins-cx
+  name: jenkins-cx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins-cx
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: jenkins-cx
+    spec:
+      containers:
+        - image: continuous-x/jenkins-cx:latest-alpine
+          name: jenkins-cx
+          imagePullPolicy: Never
+          resources: {}
+          ports:
+            - containerPort: 80
