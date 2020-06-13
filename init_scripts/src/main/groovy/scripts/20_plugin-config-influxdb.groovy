@@ -1,51 +1,82 @@
 package scripts
 
 import com.cx.jenkins.image.hook.HookScriptHelper
+import hudson.util.Secret
 import jenkins.model.Jenkins
-import jenkins.model.JenkinsLocationConfiguration
+import jenkinsci.plugins.influxdb.InfluxDbGlobalConfig
+import jenkinsci.plugins.influxdb.models.Target
 
 HookScriptHelper.printHookStart(this)
+
+def influxdbTargets = [
+        operating: [
+                description: 'cx-operating',
+                url: 'http://localhost:8086',
+                username: '',
+                password: '',
+                database: 'cx_sharedlib_metrics',
+                retentionPolicy: 'autogen',
+                jobScheduledTimeAsPointsTimestamp: 'true',
+                exposeExceptions: 'true',
+                usingJenkinsProxy: 'true',
+                globalListener: false,
+                globalListenerFilter: ''
+        ],
+        cicd: [
+                description: 'cx-cicd',
+                url: 'http://localhost:8086',
+                username: '',
+                password: '',
+                database: 'cx_sharedlib_metrics',
+                retentionPolicy: 'autogen',
+                jobScheduledTimeAsPointsTimestamp: 'true',
+                exposeExceptions: 'true',
+                usingJenkinsProxy: 'true',
+                globalListener: false,
+                globalListenerFilter: ''
+        ]
+]
 
 def jenkins = Jenkins.getInstanceOrNull()
 assert jenkins != null: "Jenkins instance is null"
 
 if (!jenkins.isQuietingDown()) {
-    println("=== Setting Jenkins URL")
-    def influxdb = Jenkins.instance.getDescriptorByType(jenkinsci.plugins.influxdb.InfluxDbStep.DescriptorImpl)
+    InfluxDbGlobalConfig influxdb = InfluxDbGlobalConfig.getInstance()
 
-// Create target
-    def target = new jenkinsci.plugins.influxdb.models.Target()
-
-// Set target details
-
-// Mandatory fields
-    target.description = 'my-new-target'
-    target.url = 'http://influxdburl:8086'
-    target.username = 'my-username'
-
-// version < 2.0
-    target.password = 'my-password'
-
-// version >= 2.0
-    target.password = hudson.util.Secret.fromString('my-password')
-
-    target.database = 'my-database'
-
-// Optional fields
-    target.retentionPolicy = '1d'                    // default = 'autogen'
-    target.jobScheduledTimeAsPointsTimestamp = true  // default = false
-    target.exposeExceptions = true                   // default = true
-    target.usingJenkinsProxy = true                  // default = false
-
-// Add a target by using the created target object
+    //metric target operating
+    println("=== Setting InfluxDB Target ${influxdbTargets.operating.description}")
+    influxdb.removeTarget(influxdbTargets.operating.description)
+    Target target = new Target()
+    target.description = influxdbTargets.operating.description
+    target.url = influxdbTargets.operating.url
+    target.username = influxdbTargets.operating.username
+    target.password = Secret.fromString(influxdbTargets.operating.password)
+    target.database = influxdbTargets.operating.database
+    target.retentionPolicy = influxdbTargets.operating.retentionPolicy
+    target.jobScheduledTimeAsPointsTimestamp = influxdbTargets.operating.jobScheduledTimeAsPointsTimestamp
+    target.exposeExceptions = influxdbTargets.operating.exposeExceptions
+    target.usingJenkinsProxy = influxdbTargets.operating.usingJenkinsProxy
+    target.globalListener = influxdbTargets.operating.globalListener
+    target.globalListenerFilter = influxdbTargets.operating.globalListenerFilter
     influxdb.addTarget(target)
-    influxdb.save()
 
-// Write stuff to InfluxDB
-    influxDbPublisher(selectedTarget: 'my-new-target')
+    //metric target cicd
+    println("=== Setting InfluxDB Target ${influxdbTargets.cicd.description}")
+    influxdb.removeTarget(influxdbTargets.cicd.description)
+    Target target2 = new Target()
+    target2.description = influxdbTargets.cicd.description
+    target2.url = influxdbTargets.cicd.url
+    target2.username = influxdbTargets.cicd.username
+    target2.password = Secret.fromString(influxdbTargets.cicd.password)
+    target2.database = influxdbTargets.cicd.database
+    target2.retentionPolicy = influxdbTargets.cicd.retentionPolicy
+    target2.jobScheduledTimeAsPointsTimestamp = influxdbTargets.cicd.jobScheduledTimeAsPointsTimestamp
+    target2.exposeExceptions = influxdbTargets.cicd.exposeExceptions
+    target2.usingJenkinsProxy = influxdbTargets.cicd.usingJenkinsProxy
+    target2.globalListener = influxdbTargets.cicd.globalListener
+    target2.globalListenerFilter = influxdbTargets.cicd.globalListenerFilter
+    influxdb.addTarget(target2)
 
-// Remove a target by using the target description field value
-    influxdb.removeTarget('my-new-target')
     influxdb.save()
 } else {
     println '*** Shutdown mode enabled. Configure Jenkins is SKIPPED!'
