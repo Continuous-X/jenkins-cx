@@ -8,9 +8,12 @@ import jenkinsci.plugins.influxdb.models.Target
 
 HookScriptHelper.printHookStart(this)
 
+final String INFLUXDB_TARGET_CX_OPERATING = 'cx-operating'
+final String INFLUXDB_TARGET_CX_CICD = 'cx-cicd'
+
 def influxdbTargets = [
         operating: [
-                description: 'cx-operating',
+                description: INFLUXDB_TARGET_CX_OPERATING,
                 url: 'http://localhost:8086',
                 username: '',
                 password: '',
@@ -23,7 +26,7 @@ def influxdbTargets = [
                 globalListenerFilter: ''
         ],
         cicd: [
-                description: 'cx-cicd',
+                description: INFLUXDB_TARGET_CX_CICD,
                 url: 'http://localhost:8086',
                 username: '',
                 password: '',
