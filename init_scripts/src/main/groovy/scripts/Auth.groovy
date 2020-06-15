@@ -1,7 +1,7 @@
 package scripts
 
-import com.cx.jenkins.image.hook.DefaultUser
-import com.cx.jenkins.image.hook.HookScriptHelper
+import com.continuousx.jenkins.image.hook.DefaultUser
+import com.continuousx.jenkins.image.hook.HookScriptHelper
 import hudson.model.User
 import hudson.security.HudsonPrivateSecurityRealm
 import jenkins.model.Jenkins

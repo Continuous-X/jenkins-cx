@@ -1,6 +1,6 @@
 package scripts
 
-import com.cx.jenkins.image.hook.HookScriptHelper
+import com.continuousx.jenkins.image.hook.HookScriptHelper
 import hudson.plugins.locale.PluginImpl
 import hudson.tasks.Mailer
 import jenkins.model.Jenkins

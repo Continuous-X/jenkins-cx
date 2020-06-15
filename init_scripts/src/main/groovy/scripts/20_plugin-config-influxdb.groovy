@@ -1,6 +1,7 @@
 package scripts
 
-import com.cx.jenkins.image.hook.HookScriptHelper
+import com.continuousx.jenkins.image.hook.HookScriptHelper
+import com.continuousx.jenkins.plugins.influxdb.InfluxDBConstants
 import hudson.util.Secret
 import jenkins.model.Jenkins
 import jenkinsci.plugins.influxdb.InfluxDbGlobalConfig
@@ -8,12 +9,9 @@ import jenkinsci.plugins.influxdb.models.Target
 
 HookScriptHelper.printHookStart(this)
 
-final String INFLUXDB_TARGET_CX_OPERATING = 'cx-operating'
-final String INFLUXDB_TARGET_CX_CICD = 'cx-cicd'
-
 def influxdbTargets = [
         operating: [
-                description: INFLUXDB_TARGET_CX_OPERATING,
+                description: InfluxDBConstants.INFLUXDB_TARGET_CX_OPERATING,
                 url: 'http://localhost:8086',
                 username: '',
                 password: '',
@@ -26,7 +24,7 @@ def influxdbTargets = [
                 globalListenerFilter: ''
         ],
         cicd: [
-                description: INFLUXDB_TARGET_CX_CICD,
+                description: InfluxDBConstants.INFLUXDB_TARGET_CX_CICD,
                 url: 'http://localhost:8086',
                 username: '',
                 password: '',
