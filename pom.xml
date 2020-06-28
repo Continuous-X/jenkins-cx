@@ -22,7 +22,7 @@
     </scm>
 
     <properties>
-        <jenkins.version>2.241</jenkins.version>
+        <jenkins.version>2.242</jenkins.version>
         <java.level>8</java.level>
         <groovy.version>2.4.19</groovy.version>
     </properties>
@@ -140,7 +140,7 @@
             <dependency>
                 <groupId>org.jenkins-ci.plugins</groupId>
                 <artifactId>git</artifactId>
-                <version>4.2.2</version>
+                <version>4.3.0</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.jenkins-ci.plugins</groupId>
@@ -163,6 +163,11 @@
                         <artifactId>workflow-step-api</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.jenkins-ci.plugins</groupId>
+                <artifactId>github-api</artifactId>
+                <version>1.114.3</version>
             </dependency>
             <dependency>
                 <groupId>org.jenkins-ci.plugins</groupId>
@@ -458,6 +463,11 @@
         <dependency>
             <groupId>org.jenkins-ci.plugins</groupId>
             <artifactId>git</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jenkins-ci.plugins</groupId>
+            <artifactId>github-api</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
