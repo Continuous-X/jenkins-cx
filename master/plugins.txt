@@ -19,7 +19,7 @@ role-strategy:3.0
 security-inspector:0.5
 timestamper:1.11.3
 workflow-aggregator:2.6
-workflow-cps:2.80
+workflow-cps:2.81
 workflow-job:2.39
 workflow-cps-global-lib:2.16
 yet-another-docker-plugin:0.2.0
