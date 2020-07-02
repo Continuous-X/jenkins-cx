@@ -6,6 +6,7 @@ extra_java_opts=( \
   '-Djenkins.install.runSetupWizard=false -Djenkins.model.Jenkins.slaveAgentPort=50000' \
   '-Djenkins.model.Jenkins.slaveAgentPortEnforce=true' \
   "-Dio.jenkins.dev.security.createAdmin=${JENKINS_CONFIG_CREATE_ADMIN}" \
+  "-Dio.jenkins.dev.github.api.token=${JENKINS_CONFIG_GITHUB_API_USER_TOKEN}" \
   "-Dio.jenkins.dev.security.allowRunsOnMaster=${JENKINS_CONFIG_ALLOW_RUNS_ON_MASTER}" \
   '-Dhudson.model.LoadStatistics.clock=1000' \
   "-Dio.jenkins.dev.mainseed.repository=${JENKINS_CONFIG_REPO}" \
