@@ -1,13 +1,14 @@
 package scripts
 
-import com.continuousx.jenkins.image.hook.DefaultUser
+import com.cloudbees.plugins.credentials.CredentialsScope
+import com.cloudbees.plugins.credentials.SystemCredentialsProvider
+import com.cloudbees.plugins.credentials.domains.Domain
+import com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl
 import com.continuousx.jenkins.image.hook.HookScriptHelper
-import hudson.model.User
-import hudson.security.HudsonPrivateSecurityRealm
+import hudson.ExtensionList
 import jenkins.model.Jenkins
-import jenkins.security.QueueItemAuthenticatorConfiguration
-import org.jenkinsci.plugins.authorizeproject.GlobalQueueItemAuthenticator
-import org.jenkinsci.plugins.authorizeproject.strategy.TriggeringUsersAuthorizationStrategy
+
+import static com.continuousx.jenkins.image.hook.Credentials.*
 
 HookScriptHelper.printHookStart(this)
 
@@ -15,15 +16,20 @@ String githubApiToken = java.lang.System.getProperty("io.jenkins.dev.github.api.
 
 println("=== Configuring credentials")
 if (githubApiToken.length() > 0) {
-    HudsonPrivateSecurityRealm securityRealm = Jenkins.getInstanceOrNull().getSecurityRealm()
-    User ghApiUser = securityRealm.createcAccount(DefaultUser.GITHUB_API_USER_USERNAME, DefaultUser.ADMIN_PASSWORD)
-    ghApiUser.setFullName(DefaultUser.GITHUB_API_USER_FULLNAME)
+    Domain globalDomain = Domain.global()
+    ExtensionList extensionList = Jenkins.getInstanceOrNull().getExtensionList('com.cloudbees.plugins.credentials.SystemCredentialsProvider')
+    extensionList.each { extension ->
+        SystemCredentialsProvider provider = extension as SystemCredentialsProvider
+        SystemCredentialsProvider.StoreImpl store = provider.getStore()
+        UsernamePasswordCredentialsImpl githubAccount = new UsernamePasswordCredentialsImpl(
+                CredentialsScope.GLOBAL,
+                GITHUB_API_CREDENTIAL_ID,
+                GITHUB_API_CREDENTIAL_DESCRIPTION,
+                GITHUB_API_CREDENTIAL_USER_NAME,
+                githubApiToken
+        )
+        store.addCredentials(globalDomain, githubAccount)
+    }
 }
-
-println("=== Configure Authorize Project")
-GlobalQueueItemAuthenticator auth = new GlobalQueueItemAuthenticator(
-    new TriggeringUsersAuthorizationStrategy()
-)
-QueueItemAuthenticatorConfiguration.get().authenticators.add(auth)
 
 HookScriptHelper.printHookEnd(this)
