@@ -9,10 +9,13 @@ import jenkinsci.plugins.influxdb.models.Target
 
 HookScriptHelper.printHookStart(this)
 
+String influxdbHostname = java.lang.System.getProperty("Dio.jenkins.dev.influxdb.hostname")
+String influxdbPort = java.lang.System.getProperty("Dio.jenkins.dev.influxdb.port")
+
 def influxdbTargets = [
         operating: [
                 description: InfluxDBConstants.INFLUXDB_TARGET_CX_OPERATING,
-                url: 'http://localhost:8086',
+                url: "http://${influxdbHostname}:${influxdbPort}",
                 username: '',
                 password: '',
                 database: 'cx_sharedlib_metrics',
@@ -25,7 +28,7 @@ def influxdbTargets = [
         ],
         cicd: [
                 description: InfluxDBConstants.INFLUXDB_TARGET_CX_CICD,
-                url: 'http://localhost:8086',
+                url: "http://${influxdbHostname}:${influxdbPort}",
                 username: '',
                 password: '',
                 database: 'cx_sharedlib_metrics',

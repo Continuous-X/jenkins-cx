@@ -29,6 +29,7 @@ if (githubApiToken.length() > 0) {
                 githubApiToken
         )
         store.addCredentials(globalDomain, githubAccount)
+
     }
 }
 

@@ -9,6 +9,8 @@ extra_java_opts=( \
   "-Dio.jenkins.dev.github.api.token=${JENKINS_CONFIG_GITHUB_API_USER_TOKEN}" \
   "-Dio.jenkins.dev.security.allowRunsOnMaster=${JENKINS_CONFIG_ALLOW_RUNS_ON_MASTER}" \
   '-Dhudson.model.LoadStatistics.clock=1000' \
+  "-Dio.jenkins.dev.influxdb.hostname=${JENKINS_CONFIG_INFLUXDB_HOSTNAME}" \
+  "-Dio.jenkins.dev.influxdb.port=${JENKINS_CONFIG_INFLUXDB_PORT}" \
   "-Dio.jenkins.dev.mainseed.repository=${JENKINS_CONFIG_REPO}" \
   "-Dio.jenkins.dev.mainseed.create=${JENKINS_CONFIG_MAINSEED_CREATE}"
 )
