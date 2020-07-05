@@ -9,8 +9,8 @@ import jenkinsci.plugins.influxdb.models.Target
 
 HookScriptHelper.printHookStart(this)
 
-String influxdbHostname = java.lang.System.getProperty("Dio.jenkins.dev.influxdb.hostname")
-String influxdbPort = java.lang.System.getProperty("Dio.jenkins.dev.influxdb.port")
+String influxdbHostname = java.lang.System.getProperty("io.jenkins.dev.influxdb.hostname")
+String influxdbPort = java.lang.System.getProperty("io.jenkins.dev.influxdb.port")
 
 def influxdbTargets = [
         operating: [
