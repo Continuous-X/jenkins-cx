@@ -5,11 +5,14 @@ set
 extra_java_opts=( \
   '-Djenkins.install.runSetupWizard=false -Djenkins.model.Jenkins.slaveAgentPort=50000' \
   '-Djenkins.model.Jenkins.slaveAgentPortEnforce=true' \
-  "-Dio.jenkins.dev.security.createAdmin=${JENKINS_CONFIG_CREATE_ADMIN}" \
-  "-Dio.jenkins.dev.security.allowRunsOnMaster=${JENKINS_CONFIG_ALLOW_RUNS_ON_MASTER}" \
+  "-Dio.jenkins.dev.security.createAdmin=${CREATE_ADMIN}" \
+  "-Dio.jenkins.dev.github.api.token=${GITHUB_API_TOKEN}" \
+  "-Dio.jenkins.dev.security.allowRunsOnMaster=${ALLOW_RUNS_ON_MASTER}" \
   '-Dhudson.model.LoadStatistics.clock=1000' \
+  "-Dio.jenkins.dev.influxdb.hostname=${INFLUXDB_HOSTNAME}" \
+  "-Dio.jenkins.dev.influxdb.port=${INFLUXDB_PORT}" \
   "-Dio.jenkins.dev.mainseed.repository=${JENKINS_CONFIG_REPO}" \
-  "-Dio.jenkins.dev.mainseed.create=${JENKINS_CONFIG_MAINSEED_CREATE}"
+  "-Dio.jenkins.dev.mainseed.create=${CREATE_MAINSEED}"
 )
 
 if [ -z "$DEV_HOST" ] ; then

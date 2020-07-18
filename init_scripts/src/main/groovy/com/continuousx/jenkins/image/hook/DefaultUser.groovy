@@ -1,4 +1,4 @@
-package com.cx.jenkins.image.hook
+package com.continuousx.jenkins.image.hook
 
 class DefaultUser {
     public final static String ADMIN_FULLNAME = 'Admin'
@@ -7,4 +7,5 @@ class DefaultUser {
     public final static String USER_FULLNAME = 'User'
     public final static String USER_USERNAME = 'user'
     public final static String USER_PASSWORD = 'user'
+
 }

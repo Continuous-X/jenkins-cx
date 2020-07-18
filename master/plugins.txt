@@ -6,6 +6,7 @@ configuration-as-code-groovy:1.1
 git:4.3.0
 github-api:1.115
 greenballs:1.15
+influxdb:2.3
 jdk-tool:1.4
 job-dsl:1.77
 job-restrictions:0.8

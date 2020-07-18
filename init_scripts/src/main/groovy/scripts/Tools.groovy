@@ -1,6 +1,6 @@
 package scripts
 
-import com.cx.jenkins.image.hook.HookScriptHelper
+import com.continuousx.jenkins.image.hook.HookScriptHelper
 import jenkins.model.Jenkins
 import hudson.model.JDK
 import hudson.tasks.Maven.MavenInstallation;

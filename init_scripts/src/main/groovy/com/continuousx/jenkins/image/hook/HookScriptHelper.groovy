@@ -1,4 +1,4 @@
-package com.cx.jenkins.image.hook
+package com.continuousx.jenkins.image.hook
 
 class HookScriptHelper {
 
