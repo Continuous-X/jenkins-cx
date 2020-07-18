@@ -4,7 +4,7 @@ cloudbees-folder:6.14
 configuration-as-code:1.41
 configuration-as-code-groovy:1.1
 git:4.3.0
-github-api:1.114.3
+github-api:1.115
 greenballs:1.15
 influxdb:2.3
 jdk-tool:1.4
@@ -12,8 +12,8 @@ job-dsl:1.77
 job-restrictions:0.8
 locale:1.4
 mailer:1.32
-matrix-auth:2.6.1
-maven-plugin:3.6
+matrix-auth:2.6.2
+maven-plugin:3.7
 ownership:0.13.0
 pipeline-utility-steps:2.6.1
 role-strategy:3.0
