@@ -18,7 +18,7 @@ ownership:0.13.0
 pipeline-utility-steps:2.6.1
 role-strategy:3.0
 security-inspector:0.5
-timestamper:1.11.3
+timestamper:1.11.4
 workflow-aggregator:2.6
 workflow-cps:2.81
 workflow-job:2.39
