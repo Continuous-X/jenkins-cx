@@ -1,7 +1,7 @@
 # 🚀 New features and improvements
 
 # 📦 Dependency Updates
-- jenkins 2.245
+- jenkins 2.248
 - plugin updates
 
 # 📝 Documentation updates
