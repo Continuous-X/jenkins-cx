@@ -3,6 +3,7 @@ blueocean:1.23.1
 cloudbees-folder:6.14
 configuration-as-code:1.43
 configuration-as-code-groovy:1.1
+dark-theme:0.0.5
 git:4.3.0
 github-api:1.115
 greenballs:1.15
@@ -18,6 +19,7 @@ ownership:0.13.0
 pipeline-utility-steps:2.6.1
 role-strategy:3.0
 security-inspector:0.5
+simple-theme-plugin:0.6
 timestamper:1.11.5
 workflow-aggregator:2.6
 workflow-cps:2.82
