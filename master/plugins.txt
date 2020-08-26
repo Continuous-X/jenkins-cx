@@ -4,7 +4,7 @@ cloudbees-folder:6.14
 configuration-as-code:1.43
 configuration-as-code-groovy:1.1
 dark-theme:0.0.5
-git:4.3.0
+git:4.4.0
 github-api:1.115
 greenballs:1.15
 influxdb:2.4
