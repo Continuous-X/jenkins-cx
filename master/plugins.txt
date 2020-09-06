@@ -4,8 +4,8 @@ cloudbees-folder:6.14
 configuration-as-code:1.43
 configuration-as-code-groovy:1.1
 dark-theme:0.0.5
-git:4.4.0
-github-api:1.115
+git:4.4.1
+github-api:1.116
 greenballs:1.15
 influxdb:2.4
 jdk-tool:1.4
@@ -22,8 +22,8 @@ security-inspector:0.5
 simple-theme-plugin:0.6
 timestamper:1.11.5
 workflow-aggregator:2.6
-workflow-cps:2.82
-workflow-job:2.39
+workflow-cps:2.83
+workflow-job:2.40
 workflow-cps-global-lib:2.17
 yet-another-docker-plugin:0.2.0
 
