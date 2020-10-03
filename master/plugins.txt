@@ -17,7 +17,7 @@ matrix-auth:2.6.3
 maven-plugin:3.7
 ownership:0.13.0
 pipeline-utility-steps:2.6.1
-role-strategy:3.0
+role-strategy:3.1
 security-inspector:0.5
 simple-theme-plugin:0.6
 timestamper:1.11.5
