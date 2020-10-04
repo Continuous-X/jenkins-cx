@@ -1,0 +1,39 @@
+kind: Template
+apiVersion: v1
+metadata:
+  name: my-template
+parameters:
+  - name: BUILDER_NAME
+    displayName: Builder Name
+    description: Builder Name
+    required: true
+  - name: SOURCE_REPOSITORY_URL
+    displayName: Source Repository URL
+    description: The URL of the repository with your application source code
+    value: https://github.com/sclorg/cakephp-ex.git
+    required: true
+  - name: GITHUB_WEBHOOK_SECRET
+    description: A secret string used to configure the GitHub webhook
+    generate: expression
+    from: "[a-zA-Z0-9]{40}"
+  - name: REPLICA_COUNT
+    description: Number of replicas to run
+    value: "2"
+    required: true
+objects:
+  - kind: BuildConfig
+    apiVersion: v1
+    metadata:
+      name: '${BUILDER_NAME}'
+      annotations:
+        description: Defines how to build the application
+    spec:
+      runPolicy: Serial
+      source:
+        type: Binary
+      strategy:
+        type: Docker
+          dockerStrategy:
+            dockerfilePath: Dockerfile
+            noCache: true
+            forcePull: true
