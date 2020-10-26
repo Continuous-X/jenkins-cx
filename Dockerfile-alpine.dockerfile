@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:2.261-alpine
+FROM jenkins/jenkins:2.263-alpine
 
 ARG DEV_HOST=localhost
 ARG CREATE_ADMIN=true
