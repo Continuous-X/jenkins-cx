@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>plugin</artifactId>
-        <version>4.11</version>
+        <version>4.12</version>
     </parent>
 
     <groupId>com.cx.jenkins.image</groupId>
@@ -22,11 +22,10 @@
     </scm>
 
     <properties>
-        <jenkins.version>2.261</jenkins.version>
+        <jenkins.version>2.263</jenkins.version>
         <java.level>8</java.level>
         <groovy.version>2.4.20</groovy.version>
     </properties>
-
 
     <developers>
         <developer>
@@ -129,7 +128,7 @@
             <dependency>
                 <groupId>io.jenkins</groupId>
                 <artifactId>configuration-as-code</artifactId>
-                <version>1.44</version>
+                <version>1.45</version>
             </dependency>
             <dependency>
                 <groupId>io.jenkins.plugins</groupId>
@@ -154,7 +153,7 @@
             <dependency>
                 <groupId>org.jenkins-ci.plugins</groupId>
                 <artifactId>git</artifactId>
-                <version>4.4.4</version>
+                <version>4.4.5</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.jenkins-ci.plugins</groupId>
@@ -252,7 +251,7 @@
             <dependency>
                 <groupId>org.jenkins-ci.plugins</groupId>
                 <artifactId>timestamper</artifactId>
-                <version>1.11.5</version>
+                <version>1.11.8</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.apache.commons</groupId>
