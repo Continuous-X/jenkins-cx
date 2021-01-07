@@ -2,7 +2,7 @@ FROM adoptopenjdk/openjdk8:armv7l-centos-jdk8u262-b10-slim
 #FROM jenkins4eval/jenkins:2.273-slim-arm
 
 RUN yum update -y
-RUN yum install -y git unzip which
+RUN yum install -y git unzip which deltarpm
 #RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.rpm.sh | bash
 #RUN yum install -y git-lfs
 RUN yum clean all
@@ -122,11 +122,11 @@ USER ${user}
 ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/jenkins.sh"]
 
 # from a derived Dockerfile, can use `RUN install-plugins.sh active.txt` to setup $REF/plugins from a support bundle
-RUN curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/install-plugins.sh -o /usr/local/bin/install-plugins.sh \
-    && curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/jenkins-support -o /usr/local/bin/jenkins-support \
-    && curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/jenkins.sh -o /usr/local/bin/jenkins.sh \
-    && curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/tini-shim.sh -o /bin/tini \
-    && curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/jenkins-plugin-cli.sh -o /bin/jenkins-plugin-cli
+RUN curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/install-plugins.sh -o /usr/local/bin/install-plugins.sh
+RUN curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/jenkins-support -o /usr/local/bin/jenkins-support
+RUN curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/jenkins.sh -o /usr/local/bin/jenkins.sh
+RUN curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/tini-shim.sh -o /bin/tini
+RUN curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/jenkins-plugin-cli.sh -o /bin/jenkins-plugin-cli
 
 COPY master/plugins.txt ${REF}/plugins.txt
 COPY init_scripts/src/main/groovy/ ${REF}/init.groovy.d/
