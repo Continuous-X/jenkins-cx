@@ -1,11 +1,11 @@
 FROM adoptopenjdk/openjdk8:armv7l-centos-jdk8u262-b10-slim
 #FROM jenkins4eval/jenkins:2.273-slim-arm
 
-RUN yum update -y \
-    && yum install -y git unzip which dnf \
-    && curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.rpm.sh | bash \
-    && yum install -y git-lfs \
-    && yum clean all
+RUN yum update -y
+RUN yum install -y git unzip which
+#RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.rpm.sh | bash
+#RUN yum install -y git-lfs
+RUN yum clean all
 
 ARG user=jenkins
 ARG group=jenkins
