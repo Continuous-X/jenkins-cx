@@ -29,8 +29,6 @@ ARG LOCAL_PIPELINE_LIBRARY_PATH="${JENKINS_HOME}/pipeline-library"
 ARG VERSION="0.1"
 ARG JENKINS_CONFIG_REPO="https://github.com/Continuous-X/jenkins-cx-config-demo-project.git"
 ARG JENKINS_CONFIG_CASC="master/jenkins.yaml"
-ARG RUNTIME_USER="jenkins"
-ARG RUNTIME_GROUP="jenkins"
 ARG INFLUXDB_HOSTNAME="localhost"
 ARG INFLUXDB_PORT="8086"
 
@@ -44,8 +42,8 @@ ENV CREATE_ADMIN="${CREATE_ADMIN}" \
     JENKINS_CONFIG_CASC="${JENKINS_CONFIG_CASC}" \
     CASC_JENKINS_CONFIG="${JENKINS_HOME}/casc_configs/jenkins.yaml" \
     LOCAL_PIPELINE_LIBRARY_PATH="${LOCAL_PIPELINE_LIBRARY_PATH}" \
-    RUNTIME_USER="${RUNTIME_USER}" \
-    RUNTIME_GROUP="${RUNTIME_GROUP}"
+    RUNTIME_USER="${user}" \
+    RUNTIME_GROUP="${group}"
 
 LABEL maintainer="wolver.minion" \
       Description="Setup Jenkins Config-as-Code with Docker, Pipeline, and Groovy Hook Scripts. thx Oleg" \
@@ -115,11 +113,6 @@ EXPOSE ${http_port}
 EXPOSE ${agent_port}
 
 ENV COPY_REFERENCE_FILE_LOG ${JENKINS_HOME}/copy_reference_file.log
-
-USER ${user}
-
-
-ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/jenkins.sh"]
 
 # from a derived Dockerfile, can use `RUN install-plugins.sh active.txt` to setup $REF/plugins from a support bundle
 RUN curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/install-plugins.sh -o /usr/local/bin/install-plugins.sh
