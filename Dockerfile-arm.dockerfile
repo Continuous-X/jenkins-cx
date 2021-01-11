@@ -129,6 +129,6 @@ ADD ${JENKINS_CONFIG_CASC} ${CASC_JENKINS_CONFIG}
 RUN /usr/local/bin/install-plugins.sh < ${REF}/plugins.txt; \
     mkdir -p ${LOCAL_PIPELINE_LIBRARY_PATH}
 
-USER ${RUNTIME_USER}
+#USER ${RUNTIME_USER}
 
 ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/jenkins-cx.sh"]

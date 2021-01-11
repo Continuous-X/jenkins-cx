@@ -9,6 +9,7 @@ run:
 	docker run -p 80:8080 -p 50000:50000 continuous-x/jenkins-cx:latest-alpine
 	docker run -e JENKINS_CONFIG_ALLOW_RUNS_ON_MASTER=true -e GITHUB_API_TOKEN= -e INFLUXDB_HOSTNAME= -e INFLUXDB_PORT=8086 -p 80:8080 -p 50000:50000 continuous-x/jenkins-cx:latest-alpine
 	docker run -e JENKINS_CONFIG_ALLOW_RUNS_ON_MASTER=true -e GITHUB_API_TOKEN=%GITHUB_PASSWORD% -e INFLUXDB_HOSTNAME= -e INFLUXDB_PORT=8086 -p 80:8080 -p 50000:50000 continuous-x/jenkins-cx:latest-alpine
+	docker run -e JENKINS_CONFIG_ALLOW_RUNS_ON_MASTER=true -e GITHUB_API_TOKEN=%GITHUB_PASSWORD% -e INFLUXDB_HOSTNAME= -e INFLUXDB_PORT=8086 -p 80:8080 -p 50000:50000 continuous-x/jenkins-cx:latest-arm
 
 debug:
 	docker run --rm --name ci-jenkins-io-dev -e DEBUG=true -p 5005:5005 -v maven-repo:/root/.m2 -v ${MY_PIPELINE_LIBRARY_DIR}:/var/jenkins_home/pipeline-library -v ${MY_OTHER_PIPELINE_LIBS_DIRS}:/var/jenkins_home/pipeline-libs -e DEV_HOST=${CURRENT_HOST} -p 8080:8080 -p 50000:50000  continuous-x/jenkins-cx
