@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk8:armv7l-centos-jdk8u262-b10-slim
+FROM adoptopenjdk/openjdk11:armv7l-ubuntu-jdk-11.0.8_10-slim
 #FROM jenkins4eval/jenkins:2.273-slim-arm
 
 ARG user=jenkins
@@ -46,11 +46,11 @@ LABEL maintainer="wolver.minion" \
 
 USER root
 
-#RUN yum update -y
-#RUN yum install -y git unzip which deltarpm openssl
-##RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.rpm.sh | bash
-##RUN yum install -y git-lfs
-#RUN yum clean all
+RUN apt-get update -y
+RUN apt-get upgrade -y
+RUN apt-get install -y git unzip git-lfs
+RUN apt-get autoclean
+RUN apt-get autoremove
 
 # Jenkins is run with user `jenkins`, uid = 1000
 # If you bind mount a volume from the host or a data container,
