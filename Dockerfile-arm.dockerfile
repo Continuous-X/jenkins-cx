@@ -48,7 +48,7 @@ USER root
 
 RUN apt-get update -y
 RUN apt-get upgrade -y
-RUN apt-get install -y git unzip git-lfs gpg
+RUN apt-get install -y git unzip git-lfs gpg tini
 RUN apt-get autoclean -y
 RUN apt-get autoremove -y
 
@@ -68,16 +68,6 @@ VOLUME $JENKINS_HOME
 # to set on a fresh new installation. Use it to bundle additional plugins
 # or config file with your custom jenkins Docker image.
 RUN mkdir -p ${REF}/init.groovy.d
-
-# Use tini as subreaper in Docker container to adopt zombie processes
-ARG TINI_VERSION=v0.19.0
-RUN curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/tini_pub.gpg -o ${JENKINS_HOME}/tini_pub.gpg \
-  && curl -fsSL https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini-static-armhf -o /sbin/tini \
-  && curl -fsSL https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini-static-armhf.asc -o /sbin/tini.asc \
-  && gpg --no-tty --import ${JENKINS_HOME}/tini_pub.gpg \
-  && gpg --verify /sbin/tini.asc \
-  && rm -rf /sbin/tini.asc /root/.gnupg \
-  && chmod +x /sbin/tini
 
 # jenkins version being bundled in this docker image
 ARG JENKINS_VERSION
