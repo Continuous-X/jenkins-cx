@@ -48,7 +48,7 @@ USER root
 
 RUN apt-get update -y
 RUN apt-get upgrade -y
-RUN apt-get install -y git unzip git-lfs
+RUN apt-get install -y git unzip git-lfs gpg
 RUN apt-get autoclean -y
 RUN apt-get autoremove -y
 
