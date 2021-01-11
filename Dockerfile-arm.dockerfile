@@ -1,12 +1,6 @@
 FROM adoptopenjdk/openjdk8:armv7l-centos-jdk8u262-b10-slim
 #FROM jenkins4eval/jenkins:2.273-slim-arm
 
-RUN yum update -y
-RUN yum install -y git unzip which deltarpm
-#RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.rpm.sh | bash
-#RUN yum install -y git-lfs
-RUN yum clean all
-
 ARG user=jenkins
 ARG group=jenkins
 ARG uid=1000
@@ -51,6 +45,12 @@ LABEL maintainer="wolver.minion" \
       Version="${VERSION}"
 
 USER root
+
+#RUN yum update -y
+#RUN yum install -y git unzip which deltarpm openssl
+##RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.rpm.sh | bash
+##RUN yum install -y git-lfs
+#RUN yum clean all
 
 # Jenkins is run with user `jenkins`, uid = 1000
 # If you bind mount a volume from the host or a data container,
@@ -125,9 +125,6 @@ COPY master/plugins.txt ${REF}/plugins.txt
 COPY init_scripts/src/main/groovy/ ${REF}/init.groovy.d/
 COPY master/jenkins-cx.sh /usr/local/bin/jenkins-cx.sh
 COPY ${JENKINS_CONFIG_CASC} ${CASC_JENKINS_CONFIG}
-
-RUN apk add --no-cache --update openssl && \
-    rm -rf /var/cache/apk/*
 
 RUN /usr/local/bin/install-plugins.sh < ${REF}/plugins.txt; \
     mkdir -p ${LOCAL_PIPELINE_LIBRARY_PATH}
