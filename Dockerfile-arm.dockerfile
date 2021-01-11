@@ -124,7 +124,7 @@ RUN curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/jenkins
 COPY master/plugins.txt ${REF}/plugins.txt
 COPY init_scripts/src/main/groovy/ ${REF}/init.groovy.d/
 COPY master/jenkins-cx.sh /usr/local/bin/jenkins-cx.sh
-COPY ${JENKINS_CONFIG_CASC} ${CASC_JENKINS_CONFIG}
+ADD ${JENKINS_CONFIG_CASC} ${CASC_JENKINS_CONFIG}
 
 RUN /usr/local/bin/install-plugins.sh < ${REF}/plugins.txt; \
     mkdir -p ${LOCAL_PIPELINE_LIBRARY_PATH}
