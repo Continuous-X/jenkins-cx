@@ -135,8 +135,8 @@ COPY master/jenkins-cx.sh /usr/local/bin/jenkins-cx.sh
 ADD ${JENKINS_CONFIG_CASC} ${CASC_JENKINS_CONFIG}
 
 #RUN /usr/local/bin/install-plugins.sh < ${REF}/plugins.txt; \
-RUN /bin/jenkins-plugin-cli < ${REF}/plugins.txt; \
-    mkdir -p ${LOCAL_PIPELINE_LIBRARY_PATH}
+RUN /bin/jenkins-plugin-cli -f ${REF}/plugins.txt \
+    && mkdir -p ${LOCAL_PIPELINE_LIBRARY_PATH}
 
 USER ${RUNTIME_USER}
 
