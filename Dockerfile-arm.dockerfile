@@ -77,8 +77,7 @@ RUN curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/tini_pu
   && gpg --no-tty --import ${JENKINS_HOME}/tini_pub.gpg \
   && gpg --verify /sbin/tini.asc \
   && rm -rf /sbin/tini.asc /root/.gnupg \
-  && chmod +x /sbin/tini \
-  && ls -la /sbin
+  && chmod 755 /sbin/tini
 
 # jenkins version being bundled in this docker image
 ARG JENKINS_VERSION
@@ -121,18 +120,22 @@ RUN curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/install
     && curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/jenkins.sh -o /usr/local/bin/jenkins.sh \
     && curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/tini-shim.sh -o /bin/tini \
     && curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/jenkins-plugin-cli.sh -o /bin/jenkins-plugin-cli \
-    && chmod +x /usr/local/bin/install-plugins.sh \
-    && chmod +x /usr/local/bin/jenkins-support \
-    && chmod +x /usr/local/bin/jenkins.sh \
-    && chmod +x /sbin/tini \
-    && chmod +x /bin/jenkins-plugin-cli
+    && chmod 755 /usr/local/bin/install-plugins.sh \
+    && chmod 755 /usr/local/bin/jenkins-support \
+    && chmod 755 /usr/local/bin/jenkins.sh \
+    && chmod 755 /sbin/tini \
+    && chmod 755 /bin/jenkins-plugin-cli \
+    && ls -la /usr/local/bin/ \
+    && ls -la /sbin/ \
+    && ls -la /bin/
 
 COPY master/plugins.txt ${REF}/plugins.txt
 COPY init_scripts/src/main/groovy/ ${REF}/init.groovy.d/
 COPY master/jenkins-cx.sh /usr/local/bin/jenkins-cx.sh
 ADD ${JENKINS_CONFIG_CASC} ${CASC_JENKINS_CONFIG}
 
-RUN /usr/local/bin/install-plugins.sh < ${REF}/plugins.txt; \
+#RUN /usr/local/bin/install-plugins.sh < ${REF}/plugins.txt; \
+RUN /bin/jenkins-plugin-cli < ${REF}/plugins.txt; \
     mkdir -p ${LOCAL_PIPELINE_LIBRARY_PATH}
 
 USER ${RUNTIME_USER}
