@@ -46,11 +46,11 @@ LABEL maintainer="wolver.minion" \
 
 USER root
 
-RUN apt-get update -y
-RUN apt-get upgrade -y
-RUN apt-get install -y git unzip git-lfs gpg tini
-RUN apt-get autoclean -y
-RUN apt-get autoremove -y
+#RUN apt-get update -y
+#RUN apt-get upgrade -y
+RUN apt-get install -y git unzip git-lfs gpg
+#RUN apt-get autoclean -y
+#RUN apt-get autoremove -y
 
 # Jenkins is run with user `jenkins`, uid = 1000
 # If you bind mount a volume from the host or a data container,
@@ -68,6 +68,17 @@ VOLUME $JENKINS_HOME
 # to set on a fresh new installation. Use it to bundle additional plugins
 # or config file with your custom jenkins Docker image.
 RUN mkdir -p ${REF}/init.groovy.d
+
+# Use tini as subreaper in Docker container to adopt zombie processes
+ARG TINI_VERSION=v0.19.0
+RUN curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/tini_pub.gpg -o ${JENKINS_HOME}/tini_pub.gpg \
+  && curl -fsSL https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini-static-armhf -o /sbin/tini \
+  && curl -fsSL https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini-static-armhf.asc -o /sbin/tini.asc \
+  && gpg --no-tty --import ${JENKINS_HOME}/tini_pub.gpg \
+  && gpg --verify /sbin/tini.asc \
+  && rm -rf /sbin/tini.asc /root/.gnupg \
+  && chmod +x /sbin/tini \
+  && ls -la /sbin
 
 # jenkins version being bundled in this docker image
 ARG JENKINS_VERSION
@@ -105,11 +116,16 @@ EXPOSE ${agent_port}
 ENV COPY_REFERENCE_FILE_LOG ${JENKINS_HOME}/copy_reference_file.log
 
 # from a derived Dockerfile, can use `RUN install-plugins.sh active.txt` to setup $REF/plugins from a support bundle
-RUN curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/install-plugins.sh -o /usr/local/bin/install-plugins.sh
-RUN curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/jenkins-support -o /usr/local/bin/jenkins-support
-RUN curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/jenkins.sh -o /usr/local/bin/jenkins.sh
-RUN curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/tini-shim.sh -o /bin/tini
-RUN curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/jenkins-plugin-cli.sh -o /bin/jenkins-plugin-cli
+RUN curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/install-plugins.sh -o /usr/local/bin/install-plugins.sh \
+    && curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/jenkins-support -o /usr/local/bin/jenkins-support \
+    && curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/jenkins.sh -o /usr/local/bin/jenkins.sh \
+    && curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/tini-shim.sh -o /bin/tini \
+    && curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/jenkins-plugin-cli.sh -o /bin/jenkins-plugin-cli \
+    && chmod +x /usr/local/bin/install-plugins.sh \
+    && chmod +x /usr/local/bin/jenkins-support \
+    && chmod +x /usr/local/bin/jenkins.sh \
+    && chmod +x /sbin/tini \
+    && chmod +x /bin/jenkins-plugin-cli
 
 COPY master/plugins.txt ${REF}/plugins.txt
 COPY init_scripts/src/main/groovy/ ${REF}/init.groovy.d/
@@ -119,6 +135,6 @@ ADD ${JENKINS_CONFIG_CASC} ${CASC_JENKINS_CONFIG}
 RUN /usr/local/bin/install-plugins.sh < ${REF}/plugins.txt; \
     mkdir -p ${LOCAL_PIPELINE_LIBRARY_PATH}
 
-#USER ${RUNTIME_USER}
+USER ${RUNTIME_USER}
 
 ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/jenkins-cx.sh"]
