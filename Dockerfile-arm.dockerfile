@@ -46,11 +46,11 @@ LABEL maintainer="wolver.minion" \
 
 USER root
 
-#RUN apt-get update -y
-#RUN apt-get upgrade -y
+RUN apt-get update -y
+RUN apt-get upgrade -y
 RUN apt-get install -y git unzip git-lfs gpg
-#RUN apt-get autoclean -y
-#RUN apt-get autoremove -y
+RUN apt-get autoclean -y
+RUN apt-get autoremove -y
 
 # Jenkins is run with user `jenkins`, uid = 1000
 # If you bind mount a volume from the host or a data container,
