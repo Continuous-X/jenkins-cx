@@ -124,6 +124,7 @@ RUN curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/install
     && chmod 755 /usr/local/bin/jenkins-support \
     && chmod 755 /usr/local/bin/jenkins.sh \
     && chmod 755 /sbin/tini \
+    && chmod 755 /bin/tini \
     && chmod 755 /bin/jenkins-plugin-cli \
     && ls -la /usr/local/bin/ \
     && ls -la /sbin/ \
@@ -135,7 +136,8 @@ COPY master/jenkins-cx.sh /usr/local/bin/jenkins-cx.sh
 ADD ${JENKINS_CONFIG_CASC} ${CASC_JENKINS_CONFIG}
 
 #RUN /bin/jenkins-plugin-cli -f ${REF}/plugins.txt \
-RUN /usr/local/bin/install-plugins.sh < ${REF}/plugins.txt \
+RUN chmod 755 /usr/local/bin/jenkins-cx.sh \
+    /usr/local/bin/install-plugins.sh < ${REF}/plugins.txt \
     && mkdir -p ${LOCAL_PIPELINE_LIBRARY_PATH}
 
 USER ${RUNTIME_USER}
