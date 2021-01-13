@@ -86,10 +86,7 @@ RUN apt-get update -y \
     && chmod 755 /usr/local/bin/jenkins.sh \
     && chmod 755 /sbin/tini \
     && chmod 755 /bin/tini \
-    && chmod 755 /bin/jenkins-plugin-cli \
-    && ls -la /usr/local/bin/ \
-    && ls -la /sbin/ \
-    && ls -la /bin/
+    && chmod 755 /bin/jenkins-plugin-cli
 
 COPY master/plugins.txt ${REF}/plugins.txt
 COPY init_scripts/src/main/groovy/ ${REF}/init.groovy.d/
