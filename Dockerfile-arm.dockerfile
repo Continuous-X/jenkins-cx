@@ -142,4 +142,4 @@ RUN chmod 755 /usr/local/bin/jenkins-cx.sh \
 
 USER ${RUNTIME_USER}
 
-#ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/jenkins-cx.sh"]
+ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/jenkins-cx.sh"]
