@@ -21,13 +21,14 @@ ARG INFLUXDB_HOSTNAME="localhost"
 ARG INFLUXDB_PORT="8086"
 ARG TINI_VERSION="v0.19.0"
 ARG JENKINS_VERSION="2.275"
-ARG JENKINS_SHA=5ed7c22531343af7ae6e72ef78badfd2d5098a6ca658c990ed1795a7e54c57a9
+ARG JENKINS_SHA=2db5deb9f119bc955ba0922b7cb239d9e18ab1000ec44493959b600f6ecda2d3
 ARG PLUGIN_INSTALLATION_MANAGER_TOOL_VERSION="2.5.0"
 
 ENV JENKINS_VERSION="${JENKINS_VERSION}" \
     JENKINS_HOME="${JENKINS_HOME}" \
     JENKINS_SLAVE_AGENT_PORT="${agent_port}" \
-    JENKINS_URL=https://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war \
+    #JENKINS_URL=https://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war \
+    JENKINS_URL=https://updates.jenkins-ci.org/download/war/${JENKINS_VERSION}/jenkins.war \
     JENKINS_UC="https://updates.jenkins.io" \
     JENKINS_UC_EXPERIMENTAL="https://updates.jenkins.io/experimental" \
     JENKINS_INCREMENTALS_REPO_MIRROR="https://repo.jenkins-ci.org/incrementals" \
