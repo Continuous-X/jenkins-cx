@@ -1,7 +1,6 @@
-package scripts
+
 
 import com.continuousx.jenkins.image.hook.DefaultUser
-import com.continuousx.jenkins.image.hook.HookScriptHelper
 import com.synopsys.arc.jenkins.plugins.ownership.OwnershipDescription
 import com.synopsys.arc.jenkins.plugins.ownership.nodes.NodeOwnerHelper
 import jenkins.model.Jenkins

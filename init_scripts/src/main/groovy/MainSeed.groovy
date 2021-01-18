@@ -1,6 +1,6 @@
-package scripts
 
-import com.continuousx.jenkins.image.hook.HookScriptHelper
+
+
 import hudson.model.FreeStyleProject
 import hudson.plugins.git.BranchSpec
 import hudson.plugins.git.GitSCM

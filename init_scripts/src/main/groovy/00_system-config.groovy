@@ -1,6 +1,3 @@
-package scripts
-
-import com.continuousx.jenkins.image.hook.HookScriptHelper
 import jenkins.model.Jenkins
 import jenkins.model.JenkinsLocationConfiguration
 
@@ -16,9 +13,8 @@ if (!jenkins.isQuietingDown()){
 
     if (host == null) {
         host = "localhost"
-    } else {
-        JenkinsLocationConfiguration.get().setUrl("http://${host}:8080")
     }
+    JenkinsLocationConfiguration.get().setUrl("http://${host}:8080")
 } else {
     println '*** Shutdown mode enabled. Configure Jenkins is SKIPPED!'
 }

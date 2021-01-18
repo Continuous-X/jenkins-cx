@@ -1,6 +1,3 @@
-package scripts
-
-import com.continuousx.jenkins.image.hook.HookScriptHelper
 import com.continuousx.jenkins.plugins.influxdb.InfluxDBConstants
 import hudson.util.Secret
 import jenkins.model.Jenkins
