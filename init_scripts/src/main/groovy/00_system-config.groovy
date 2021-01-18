@@ -1,7 +1,11 @@
 import jenkins.model.Jenkins
 import jenkins.model.JenkinsLocationConfiguration
 
-HookScriptHelper.printHookStart(this)
+println """
+###############################
+# boot - ${this.getClass().getName()} (start)  #
+###############################
+"""
 
 def jenkins = Jenkins.getInstanceOrNull()
 assert jenkins != null : "Jenkins instance is null"
@@ -19,4 +23,8 @@ if (!jenkins.isQuietingDown()){
     println '*** Shutdown mode enabled. Configure Jenkins is SKIPPED!'
 }
 
-HookScriptHelper.printHookEnd(this)
+println """
+###############################
+# boot - ${this.getClass().getName()} (end)  #
+###############################
+"""

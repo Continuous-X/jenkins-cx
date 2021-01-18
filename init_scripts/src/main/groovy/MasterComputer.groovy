@@ -1,15 +1,22 @@
-
-
-import com.continuousx.jenkins.image.hook.DefaultUser
 import com.synopsys.arc.jenkins.plugins.ownership.OwnershipDescription
 import com.synopsys.arc.jenkins.plugins.ownership.nodes.NodeOwnerHelper
 import jenkins.model.Jenkins
 
-HookScriptHelper.printHookStart(this)
+println """
+###############################
+# boot - ${this.getClass().getName()} (start)  #
+###############################
+"""
+
+final String ADMIN_USERNAME = 'admin'
 
 println("== Configuring Master computer")
 
 // Admin owns the node
-NodeOwnerHelper.setOwnership(Jenkins.getInstanceOrNull(), new OwnershipDescription(true, DefaultUser.ADMIN_USERNAME))
+NodeOwnerHelper.setOwnership(Jenkins.getInstanceOrNull(), new OwnershipDescription(true, ADMIN_USERNAME))
 
-HookScriptHelper.printHookEnd(this)
+println """
+###############################
+# boot - ${this.getClass().getName()} (end)  #
+###############################
+"""
