@@ -20,8 +20,8 @@ ARG JENKINS_CONFIG_CASC="master/jenkins.yaml"
 ARG INFLUXDB_HOSTNAME="localhost"
 ARG INFLUXDB_PORT="8086"
 ARG TINI_VERSION="v0.19.0"
-ARG JENKINS_VERSION="2.275"
-ARG JENKINS_SHA=2db5deb9f119bc955ba0922b7cb239d9e18ab1000ec44493959b600f6ecda2d3
+ARG JENKINS_VERSION="2.276"
+ARG JENKINS_SHA=d3892390eda022bbee648f226d5b9b2806a11016d0bdf691200855361fe185a0
 ARG PLUGIN_INSTALLATION_MANAGER_TOOL_VERSION="2.5.0"
 
 ENV JENKINS_VERSION="${JENKINS_VERSION}" \
@@ -56,62 +56,18 @@ LABEL maintainer="wolver.minion" \
 
 USER root
 
+COPY master/install/apt-get.sh /install/apt-get.sh
+COPY master/install/jenkins.sh /install/jenkins.sh
+COPY master/install/tini.sh /install/tini.sh
 COPY master/plugins.txt ${REF}/plugins.txt
 COPY master/logging.properties ${REF}/logging.properties
 COPY init_scripts/src/main/groovy/ ${REF}/init.groovy.d/
 COPY master/jenkins-cx.sh /usr/local/bin/jenkins-cx.sh
 ADD ${JENKINS_CONFIG_CASC} ${CASC_JENKINS_CONFIG}
 
-RUN echo ">> update operating system" \
-    && apt-get update -y \
-    && apt-get upgrade -y \
-    && echo ">> install packages" \
-    && apt-get install -y git unzip git-lfs gpg \
-    && echo ">> clean" \
-    && apt-get autoclean -y \
-    && apt-get autoremove -y \
-    && echo ">> download tini files for install" \
-    && curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/tini_pub.gpg -o "${JENKINS_HOME}/tini_pub.gpg" \
-    && curl -fsSL "https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini-static-armhf" -o /sbin/tini \
-    && curl -fsSL "https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini-static-armhf.asc" -o /sbin/tini.asc \
-    && echo ">> install tini" \
-    && gpg --no-tty --import "${JENKINS_HOME}/tini_pub.gpg" \
-    && gpg --verify /sbin/tini.asc \
-    && rm -rf /sbin/tini.asc /root/.gnupg \
-    && chmod 755 /sbin/tini \
-    && echo ">> download tini from jenkinsci" \
-    && curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/tini-shim.sh -o /bin/tini \
-    && chmod 755 /bin/tini \
-    && echo ">> create user and group" \
-    && groupadd -g "${gid}" "${group}" \
-    && useradd -d "${JENKINS_HOME}" -u "${uid}" -g "${gid}" -m -s /bin/bash "${user}" \
-    && chown "${uid}":"${gid}" "${JENKINS_HOME}" \
-    && chown -R "${user}" "${JENKINS_HOME}" "${REF}" \
-    && echo ">> download and check jenkins war file" \
-    && curl -fsSL "${JENKINS_URL}" -o /usr/share/jenkins/jenkins.war \
-    && echo "${JENKINS_SHA}  /usr/share/jenkins/jenkins.war" | sha256sum -c - \
-    && echo ">> download jenkins plugin manager" \
-    && curl -fsSL "${PLUGIN_CLI_URL}" -o /usr/lib/jenkins-plugin-manager.jar \
-    && echo ">> download jenkins scripts" \
-    && echo "    >> install-plugins.sh" \
-    && curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/install-plugins.sh -o /usr/local/bin/install-plugins.sh \
-    && chmod 755 /usr/local/bin/install-plugins.sh \
-    && echo "    >> jenkins-support" \
-    && curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/jenkins-support -o /usr/local/bin/jenkins-support \
-    && chmod 755 /usr/local/bin/jenkins-support \
-    && echo "    >> jenkins.sh" \
-    && curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/jenkins.sh -o /usr/local/bin/jenkins.sh \
-    && chmod 755 /usr/local/bin/jenkins.sh \
-    && echo "    >> jenkins-plugin-cli.sh" \
-    && curl -fsSL https://raw.githubusercontent.com/jenkinsci/docker/master/jenkins-plugin-cli.sh -o /bin/jenkins-plugin-cli \
-    && chmod 755 /bin/jenkins-plugin-cli \
-    && echo "    >> jenkins-cx.sh" \
-    && chmod 755 /usr/local/bin/jenkins-cx.sh \
-    && echo ">> create folders" \
-    && mkdir -p "${REF}/init.groovy.d" \
-    && mkdir -p "${LOCAL_PIPELINE_LIBRARY_PATH}" \
-    && echo ">> install jenkins plugins" \
-    && /usr/local/bin/install-plugins.sh < "${REF}/plugins.txt"
+RUN /install/apt-get.sh \
+    && /install/tini.sh tini \
+    && /install/jenkins.sh
 
 VOLUME ${JENKINS_HOME}
 
