@@ -19,7 +19,9 @@ ARG JENKINS_CONFIG_REPO="https://github.com/Continuous-X/jenkins-cx-config-demo-
 ARG JENKINS_CONFIG_CASC="master/jenkins.yaml"
 ARG INFLUXDB_HOSTNAME="localhost"
 ARG INFLUXDB_PORT="8086"
+ARG TINI_BIN="tini-armhf"
 ARG TINI_VERSION="v0.19.0"
+ARG TINI_SHA=5a9b35f09ad2fb5d08f11ceb84407803a1deff96cbdc0d1222f9f8323f3f8ad4
 ARG JENKINS_VERSION="2.276"
 ARG JENKINS_SHA=d3892390eda022bbee648f226d5b9b2806a11016d0bdf691200855361fe185a0
 ARG PLUGIN_INSTALLATION_MANAGER_TOOL_VERSION="2.5.0"
@@ -66,7 +68,7 @@ COPY master/jenkins-cx.sh /usr/local/bin/jenkins-cx.sh
 ADD ${JENKINS_CONFIG_CASC} ${CASC_JENKINS_CONFIG}
 
 RUN chmod 744 /install/*.sh && ls -la /install && /install/apt-get.sh \
-    && /install/tini.sh tini \
+    && /install/tini.sh \
     && /install/jenkins.sh \
     && ls -l /usr/local/bin/jenkins-cx.sh
 
