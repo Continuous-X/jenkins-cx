@@ -1,10 +1,11 @@
-package scripts
-
-import com.continuousx.jenkins.image.hook.HookScriptHelper
 import jenkins.model.Jenkins
 import jenkins.model.JenkinsLocationConfiguration
 
-HookScriptHelper.printHookStart(this)
+println """
+###############################
+# boot - ${this.getClass().getName()} (start)  #
+###############################
+"""
 
 def jenkins = Jenkins.getInstanceOrNull()
 assert jenkins != null : "Jenkins instance is null"
@@ -16,11 +17,14 @@ if (!jenkins.isQuietingDown()){
 
     if (host == null) {
         host = "localhost"
-    } else {
-        JenkinsLocationConfiguration.get().setUrl("http://${host}:8080")
     }
+    JenkinsLocationConfiguration.get().setUrl("http://${host}:8080")
 } else {
     println '*** Shutdown mode enabled. Configure Jenkins is SKIPPED!'
 }
 
-HookScriptHelper.printHookEnd(this)
+println """
+###############################
+# boot - ${this.getClass().getName()} (end)  #
+###############################
+"""

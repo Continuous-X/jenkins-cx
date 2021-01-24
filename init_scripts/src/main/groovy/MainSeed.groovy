@@ -1,6 +1,3 @@
-package scripts
-
-import com.continuousx.jenkins.image.hook.HookScriptHelper
 import hudson.model.FreeStyleProject
 import hudson.plugins.git.BranchSpec
 import hudson.plugins.git.GitSCM
@@ -11,7 +8,11 @@ import javaposse.jobdsl.plugin.RemovedViewAction
 import jenkins.model.Jenkins
 import javaposse.jobdsl.plugin.ExecuteDslScripts
 
-HookScriptHelper.printHookStart(this)
+println """
+###############################
+# boot - ${this.getClass().getName()} (start)  #
+###############################
+"""
 
 Jenkins jenkins = Jenkins.getInstanceOrNull()
 String jobName = 'MainSeed'
@@ -53,4 +54,8 @@ if (createMainSeed) {
     println "don't create the masterseed job"
 }
 
-HookScriptHelper.printHookEnd(this)
+println """
+###############################
+# boot - ${this.getClass().getName()} (end)  #
+###############################
+"""

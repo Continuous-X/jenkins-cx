@@ -1,7 +1,3 @@
-package scripts
-
-import com.continuousx.jenkins.image.hook.HookScriptHelper
-import hudson.cli.CLI
 import hudson.plugins.locale.PluginImpl
 import hudson.tasks.Mailer
 import jenkins.model.Jenkins
@@ -9,7 +5,11 @@ import jenkins.model.JenkinsLocationConfiguration
 import jenkins.security.s2m.AdminWhitelistRule
 import org.kohsuke.stapler.StaplerProxy
 
-HookScriptHelper.printHookStart(this)
+println """
+###############################
+# boot - ${this.getClass().getName()} (start)  #
+###############################
+"""
 
 println("-- scripts.System configuration")
 
@@ -33,4 +33,8 @@ PluginImpl localePlugin = (PluginImpl)Jenkins.getInstanceOrNull().getPlugin("loc
 localePlugin.systemLocale = "de_DE"
 localePlugin.@ignoreAcceptLanguage=true
 
-HookScriptHelper.printHookEnd(this)
+println """
+###############################
+# boot - ${this.getClass().getName()} (end)  #
+###############################
+"""
