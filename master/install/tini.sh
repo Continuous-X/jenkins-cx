@@ -17,9 +17,11 @@ gpg --no-tty --import "${JENKINS_HOME}/tini_pub.gpg"
 gpg --verify /sbin/tini.asc
 rm -rf /sbin/tini.asc /root/.gnupg
 chmod 755 /sbin/tini
+/sbin/tini --version
 
 echo "
 >> download tini from jenkinsci
 "
 curl -fsSL "https://raw.githubusercontent.com/jenkinsci/docker/master/tini-shim.sh" -o /bin/tini
 chmod 755 /bin/tini
+/bin/tini --version
