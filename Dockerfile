@@ -67,8 +67,8 @@ COPY init_scripts/src/main/groovy/ ${REF}/init.groovy.d/
 COPY master/jenkins-cx.sh /usr/local/bin/jenkins-cx.sh
 ADD ${JENKINS_CONFIG_CASC} ${CASC_JENKINS_CONFIG}
 
-RUN /install/apt-get.sh \
-    && /install/tini.sh tini \
+RUN chmod 744 /install/*.sh && ls -la /install && /install/apt-get.sh \
+    && /install/tini.sh \
     && /install/jenkins.sh
 
 VOLUME ${JENKINS_HOME}

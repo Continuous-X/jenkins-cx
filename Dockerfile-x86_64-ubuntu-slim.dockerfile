@@ -68,7 +68,7 @@ COPY master/jenkins-cx.sh /usr/local/bin/jenkins-cx.sh
 ADD ${JENKINS_CONFIG_CASC} ${CASC_JENKINS_CONFIG}
 
 RUN /install/apt-get.sh \
-    && /install/tini.sh tini \
+    && /install/tini.sh \
     && /install/jenkins.sh
 
 VOLUME ${JENKINS_HOME}
