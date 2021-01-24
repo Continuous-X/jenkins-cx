@@ -67,7 +67,8 @@ ADD ${JENKINS_CONFIG_CASC} ${CASC_JENKINS_CONFIG}
 
 RUN chmod 744 /install/*.sh && ls -la /install && /install/apt-get.sh \
     && /install/tini.sh tini \
-    && /install/jenkins.sh
+    && /install/jenkins.sh \
+    && ls -l /usr/local/bin/jenkins-cx.sh
 
 VOLUME ${JENKINS_HOME}
 
