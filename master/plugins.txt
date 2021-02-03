@@ -3,7 +3,7 @@ blueocean:1.24.4
 cloudbees-folder:6.15
 configuration-as-code:1.46
 configuration-as-code-groovy:1.1
-dark-theme:0.0.10
+dark-theme:0.0.11
 git:4.5.1
 github-api:1.222
 greenballs:1.15.1
