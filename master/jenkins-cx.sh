@@ -28,6 +28,13 @@ if [[ "$DEBUG" ]] ; then
   )
 fi
 
+copyPlugins() {
+
+  cp -R ${REF}/plugins/* ${JENKINS_HOME}/plugins
+}
+
+#copyPlugins
+
 export JAVA_OPTS="$JAVA_OPTS ${extra_java_opts[@]}"
 echo "${JAVA_OPTS}"
 exec /usr/local/bin/jenkins.sh "$@"

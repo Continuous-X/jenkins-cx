@@ -97,9 +97,6 @@ security:
   sSHD:
     port: -1
 unclassified:
-  themeManager:
-    disableUserThemes: true
-    theme: "darkSystem" # use 'dark' for forcing the dark theme regardless of OS settings
   globalLibraries:
     libraries:
     - defaultVersion: "master"

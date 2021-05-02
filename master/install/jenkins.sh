@@ -12,13 +12,15 @@ chown -R "${user}" "${JENKINS_HOME}" "${REF}"
 echo "
 >> download and check jenkins war file
 "
-curl -fsSL "${JENKINS_URL}" -o /usr/share/jenkins/jenkins.war
-echo "${JENKINS_SHA}  /usr/share/jenkins/jenkins.war" | sha256sum -c -
+JENKINS_WAR="/usr/share/jenkins/jenkins.war"
+curl -fsSL "${JENKINS_URL}" -o "${JENKINS_WAR}"
+echo "${JENKINS_SHA}  ${JENKINS_WAR}" | sha256sum -c -
 
 echo "
 >> download jenkins plugin manager
 "
-curl -fsSL "${PLUGIN_CLI_URL}" -o /usr/lib/jenkins-plugin-manager.jar
+PLUGIN_INSTALLER="/usr/lib/jenkins-plugin-manager.jar"
+curl -fsSL "${PLUGIN_CLI_URL}" -o "${PLUGIN_INSTALLER}"
 
 echo "
 >> download jenkins scripts
@@ -61,4 +63,5 @@ mkdir -p "${LOCAL_PIPELINE_LIBRARY_PATH}"
 echo "
 >> install jenkins plugins
 "
-/usr/local/bin/install-plugins.sh < "${REF}/plugins.txt"
+#/usr/local/bin/install-plugins.sh < "${REF}/plugins.txt"
+java -jar "${PLUGIN_INSTALLER}" --war "${JENKINS_WAR}" --plugin-file "${REF}/plugins.txt" --verbose
