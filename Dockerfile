@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11:x86_64-ubuntu-jdk-11.0.9.1_1
+FROM adoptopenjdk/openjdk11:x86_64-ubuntu-jdk-11.0.21_9
 
 ARG user=jenkins
 ARG group=jenkins
